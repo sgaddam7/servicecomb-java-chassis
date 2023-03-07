@@ -39,3 +39,7 @@ jobs:
           distribution: 'temurin'
       - name: rat check
         run: mvn apache-rat:check -B -Pit,release
+      - name: Compile Test Swagger
+        run: mvn clean install -DskipTests -pl swagger/swagger-generator -am
+      - name: Running Test without Nondex
+        run: mvn -pl swagger/swagger-generator test -Dtest=org.apache.servicecomb.swagger.generator.core.processor.annotation.ApiProcessorTest#processNotOverWriteValidConsumesAndProduces
